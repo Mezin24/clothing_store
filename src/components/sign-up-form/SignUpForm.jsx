@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FormInput from '../form-input/FormInput';
 
 import {
   createAuthUserWithemailAndPassword,
@@ -50,8 +51,8 @@ const SignUpForm = () => {
     <div>
       <h1>sign up with our email and password</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor='displayName'>Display Name</label>
-        <input
+        <FormInput
+          label='Display Name'
           type='text'
           id='displayName'
           name='displayName'
@@ -60,8 +61,8 @@ const SignUpForm = () => {
           value={displayName}
         />
 
-        <label htmlFor='email'>Email</label>
-        <input
+        <FormInput
+          label='Email'
           type='email'
           id='email'
           name='email'
@@ -70,8 +71,8 @@ const SignUpForm = () => {
           value={email}
         />
 
-        <label htmlFor='password'>Password</label>
-        <input
+        <FormInput
+          label='Password'
           type='password'
           id='password'
           name='password'
@@ -80,8 +81,8 @@ const SignUpForm = () => {
           value={password}
         />
 
-        <label htmlFor='confirm'>Confirm Password</label>
-        <input
+        <FormInput
+          label='Confirm Password'
           type='password'
           id='confirm'
           name='confirm'
