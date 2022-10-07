@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FormInput from '../form-input/FormInput';
+import { useUserContext } from '../../contexts/userContext';
 import Button from '../button/Button';
 import './sign-in-form.scss';
 
@@ -17,6 +18,7 @@ const defaultFormValue = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormValue);
   const { email, password } = formFields;
+  const { setCurrentUser } = useUserContext();
 
   const resetFormFields = () => {
     setFormFields(defaultFormValue);
@@ -36,11 +38,12 @@ const SignInForm = () => {
     e.preventDefault();
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
+      const { user } = await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
-      console.log(response);
+      setCurrentUser(user);
+
       resetFormFields();
     } catch (error) {
       if (error.code === 'auth/wrong-password') {
@@ -78,7 +81,7 @@ const SignInForm = () => {
         />
         <div className='buttons-container'>
           <Button type='submit'>Sign In</Button>
-          <Button buttonType='google' onClick={signInWithGoogle}>
+          <Button type='button' buttonType='google' onClick={signInWithGoogle}>
             Google sign in
           </Button>
         </div>
