@@ -42,18 +42,26 @@ const SignInForm = () => {
       );
       console.log(response);
       resetFormFields();
-    } catch (error) {}
+    } catch (error) {
+      if (error.code === 'auth/wrong-password') {
+        alert('incorrect password');
+      }
+      if (error.code === 'auth/user-not-found') {
+        alert('no user associated with this email');
+      }
+
+      console.log(error.code);
+    }
   };
 
   return (
     <div className='sign-up-container'>
       <h2>Already have an accout?</h2>
-      <span>sign in with your email and password</span>
+      <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
           label='Email'
           type='email'
-          id='email'
           name='email'
           required
           onChange={handleChange}
@@ -63,7 +71,6 @@ const SignInForm = () => {
         <FormInput
           label='Password'
           type='password'
-          id='password'
           name='password'
           required
           onChange={handleChange}
